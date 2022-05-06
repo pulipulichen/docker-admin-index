@@ -6,3 +6,7 @@ services:
       - ./index.js:/app/index.js
     ports:
       - "8080:80"
+    environment:
+      ENV_DATABASE_DRIVERS: '["mongo"]'
+      ENV_DEV_LOCAL_PORTS: '{admin: 8000}'
+      DEBUG_LOCAL_PORT: 5500

@@ -4,5 +4,5 @@ Category for administration
 ## Environment variables
 
 - APP_PORT=8080
-- DEBUG=false | true
+- DEBUG_LOCAL_PORT=false | true
 - MODULES

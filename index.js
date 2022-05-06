@@ -15,8 +15,9 @@ app.get('/', function (req, res) {
   //res.redirect(toURL);
   
   let baseURL = "https://pulipulichen.github.io/docker-admin-index-web/"
-  if (process.env.DEBUG === 'true') {
-    baseURL = "http://localhost:5500/"
+  //console.log(process.env.DEBUG_LOCAL_PORT, typeof(process.env.DEBUG_LOCAL_PORT))
+  if (process.env.DEBUG_LOCAL_PORT) {
+    baseURL = "http://localhost:" + process.env.DEBUG_LOCAL_PORT + "/"
   }
 
   let html = `<!DOCTYPE html>
@@ -62,8 +63,9 @@ app.get('/', function (req, res) {
 
 app.get('/env.js', function (req, res) {
   res.writeHead(200, {'Content-Type':'text/javascript'});
-  res.write(`window.ENV_DATABASE_DRIVERS=${process.env.ENV_DATABASE_DRIVERS}`);
+  res.write(`window.ENV_DATABASE_DRIVERS=${process.env.ENV_DATABASE_DRIVERS}\n`);
   res.write(`window.ENV_DEV_LOCAL_PORTS=${process.env.ENV_DEV_LOCAL_PORTS}`);
+  res.end(); //end the response
 })
 
 function getTitle (req) {
