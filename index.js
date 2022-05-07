@@ -63,8 +63,12 @@ app.get('/', function (req, res) {
 
 app.get('/env.js', function (req, res) {
   res.writeHead(200, {'Content-Type':'text/javascript'});
-  res.write(`window.ENV_DATABASE_DRIVERS=${process.env.ENV_DATABASE_DRIVERS}\n`);
-  res.write(`window.ENV_DEV_LOCAL_PORTS=${process.env.ENV_DEV_LOCAL_PORTS}`);
+  let lines =[]
+  Object.keys(process.env).forEach(key => {
+    lines.push(`window.${key} = ${process.env[key]}`)
+  })
+  res.write(lines.join(`\n`));
+
   res.end(); //end the response
 })
 
