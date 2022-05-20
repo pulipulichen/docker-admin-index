@@ -65,10 +65,10 @@ app.get('/env.js', function (req, res) {
   res.writeHead(200, {'Content-Type':'text/javascript'});
   let lines =[]
   Object.keys(process.env).forEach(key => {
-    if (!key.startsWith('ENV_') {
+    if (!key.startsWith('ENV_')) {
         return false
     }
-    lines.push(`window.${key} = ${process.env[key]}`)
+    lines.push(`window.${key} = "${process.env[key]}"`)
   })
   res.write(lines.join(`\n`));
 
