@@ -19,6 +19,12 @@ app.get('/', function (req, res) {
   if (process.env.DEBUG_LOCAL_PORT) {
     baseURL = "http://localhost:" + process.env.DEBUG_LOCAL_PORT + "/"
   }
+  if (process.env.ENV_SERVICE_SERVER) {
+    baseURL = process.env.ENV_SERVICE_SERVER
+    if (baseURL.endsWith('/') === false) {
+      baseURL = baseURL + '/'
+    }
+  }
 
   let html = `<!DOCTYPE html>
   <html>
@@ -68,7 +74,7 @@ app.get('/env.js', function (req, res) {
     if (!key.startsWith('ENV_')) {
         return false
     }
-    lines.push(`window.${key} = "${process.env[key]}"`)
+    lines.push(`window.${key} = ${process.env[key]}`)
   })
   res.write(lines.join(`\n`));
 

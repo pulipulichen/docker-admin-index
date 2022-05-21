@@ -1,4 +1,4 @@
-TAG=20220520-1731
+TAG=20220522-0044
 REPO=docker-admin-index
 
 docker build -t pudding/$REPO:$TAG .
